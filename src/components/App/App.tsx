@@ -53,9 +53,14 @@ export default function App() {
         </button>
       </header>
 
-      {isError && <ErrorMessage />}
+      {isError && (
+        <ErrorMessage errorText="There was an error, please try again..." />
+      )}
       {isLoading && <Loader />}
       {isSuccess && <NoteList notes={data?.notes ?? []} />}
+      {isSuccess && data?.notes.length === 0 && (
+        <ErrorMessage errorText="You don`t have matching notes " />
+      )}
 
       {isModalOpen && (
         <Modal onClose={closeModal}>
