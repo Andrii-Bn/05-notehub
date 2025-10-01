@@ -1,4 +1,8 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import css from "./App.module.css";
 import { useState } from "react";
 import SearchBox from "../SearchBox/SearchBox";
@@ -22,6 +26,7 @@ export default function App() {
   const { data, isLoading, isError, isSuccess } = useQuery({
     queryKey: ["notes", page, searchKey],
     queryFn: () => fetchNotes(page, searchKey),
+    placeholderData: keepPreviousData,
   });
 
   const totalPages = data?.totalPages ?? 0;
